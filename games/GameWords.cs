@@ -103,16 +103,17 @@ namespace games
                 {
                     //var ParentButton = (Button)sender;
                     //ParentButton.BackColor = Color.Green;
-                    right.Text = "False";
+                    label1.Text = "False";
                     return;
                 }                   
 
                 ++index;
             }
-            right.Text = "True";
+            label1.Text = "True";
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
