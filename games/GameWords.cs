@@ -62,6 +62,8 @@ namespace games
         private void Button_MouseClick(object sender, MouseEventArgs e)
         {
             Text = ((Control)sender).Text;
+                var pos = tableLayoutPanel.GetPositionFromControl(((Button)sender));
+            Text += pos.ToString()+' ';
         }
 
         private void TableLayoutPanel_DragOver(object sender, DragEventArgs e)
@@ -94,28 +96,40 @@ namespace games
 
         private void chek_Click(object sender, EventArgs e)
         {
-            var buttons = tableLayoutPanel.Controls;
-            int index = 0;
-            char[] startWord = ((GameWordsLogic.GetWord()).ToArray());
-            foreach (Button btn in buttons)
-            {
-                if ((btn.Text.ToArray())[0] != startWord[index])
-                {
-                    //var ParentButton = (Button)sender;
-                    //ParentButton.BackColor = Color.Green;
-                    label1.Text = "False";
-                    return;
-                }                   
-
-                ++index;
+            try
+            { 
+                var buttons = tableLayoutPanel.Controls;                
             }
-            label1.Text = "True";
+            catch
+            {
+                MessageBox.Show("Слово не заданно.");
+                return;
+            }
+
+            Point pnt = new Point(1,0);
+            Control btn;
+            string startWord = GameWordsLogic.GetWord();
+            string resWord = default;
+            for (int i = 0; i < startWord.Length; i++, pnt.X++)
+            {
+                btn = tableLayoutPanel.GetControlFromPosition(i, 0);
+                resWord += btn.Text[0];
+            }
+            if (resWord == startWord)
+                TrueAndFalse.Text = "True";
+            else
+                TrueAndFalse.Text = "False";
         }
 
-
-        private void label1_Click(object sender, EventArgs e)
+        private void GameWords_FormClosing(object sender, FormClosingEventArgs e)
         {
+            MainForm.myMainForm.Visible = true;
+        }
 
+        private void GameWords_Shown(object sender, EventArgs e)
+        {
+            TrueAndFalse.Text = "";
+            
         }
     }
 }
