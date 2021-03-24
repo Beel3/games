@@ -23,23 +23,32 @@ namespace games
 
         #region TableLayoutPanel 
         private void CreateTableLayoutPanel(string word)
-        {            
+        {
+            Point point = new Point(120, 55);
             tableLayoutPanel = new TableLayoutPanel
             {
+                Location= point,
                 Parent = this,
-                Dock = DockStyle.Top,
+                Width=700,
                 AllowDrop = true,
-                ColumnCount = word.Length                
+                ColumnCount = word.Length
             };
+            
             for (int i = 0; i < word.Length; i++)
             {
-                var button = new Button { Parent = tableLayoutPanel, Text = Convert.ToString(word[i]) };
+                var button = new Button { 
+                    Parent = tableLayoutPanel,
+                    Text = Convert.ToString(word[i]),
+                    Width=50,
+                    Height=50                    
+                };
                 button.MouseDown += Button_MouseDown;
                 button.MouseMove += Button_MouseMove;
                 button.MouseUp += Button_MouseUp;
                 button.MouseClick += Button_MouseClick;
             }
             tableLayoutPanel.DragOver += TableLayoutPanel_DragOver;
+            //tableLayoutPanel.Location = point;
         }
 
         private void Button_MouseDown(object sender, MouseEventArgs e)
@@ -92,6 +101,7 @@ namespace games
                 tableLayoutPanel.Dispose();
 
             CreateTableLayoutPanel(GameWordsLogic.DoMixedWord());
+            TrueAndFalse.Text = "";
         }
 
         private void chek_Click(object sender, EventArgs e)
@@ -130,6 +140,15 @@ namespace games
         {
             TrueAndFalse.Text = "";
             
+        }
+
+        private void GameWords_Load(object sender, EventArgs e)
+        {
+            if (tableLayoutPanel != null)
+                tableLayoutPanel.Dispose();
+
+            CreateTableLayoutPanel(GameWordsLogic.DoMixedWord());
+            TrueAndFalse.Text = "";
         }
     }
 }

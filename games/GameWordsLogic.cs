@@ -33,9 +33,8 @@ namespace games
             return MixedWord;
         }
         public string DoMixedWord()
-        {
-            if (Word == default(string))
-                genWord();
+        {            
+            genWord();
             
             var arrWord = Word.ToArray();
             Array.Sort(arrWord);

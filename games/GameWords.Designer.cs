@@ -59,7 +59,7 @@ namespace games
             this.TrueAndFalse.AutoSize = true;
             this.TrueAndFalse.Location = new System.Drawing.Point(387, 231);
             this.TrueAndFalse.Name = "TrueAndFalse";
-            this.TrueAndFalse.Size = new System.Drawing.Size(35, 13);
+            this.TrueAndFalse.Size = new System.Drawing.Size(36, 13);
             this.TrueAndFalse.TabIndex = 2;
             this.TrueAndFalse.Text = "label1";
             // 
@@ -67,13 +67,15 @@ namespace games
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 302);
+            this.ClientSize = new System.Drawing.Size(784, 261);
             this.Controls.Add(this.TrueAndFalse);
             this.Controls.Add(this.genWord);
             this.Controls.Add(this.check);
             this.Name = "GameWords";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GameWords";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameWords_FormClosing);
+            this.Load += new System.EventHandler(this.GameWords_Load);
             this.Shown += new System.EventHandler(this.GameWords_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
