@@ -61,8 +61,10 @@
     <Compile Include="GameWordsLogic.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SavesClass\AbstractSave.cs" />
+    <Compile Include="SavesClass\AbstactSave.cs" />
+    <Compile Include="SavesClass\SimpleData.cs" />
     <Compile Include="SavesClass\SaverWord.cs" />
+    <Compile Include="SavesClass\WordData.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

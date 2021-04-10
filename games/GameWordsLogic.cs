@@ -6,12 +6,22 @@ using System.Threading.Tasks;
 
 namespace games
 {
-    class GameWordsLogic
+    public class GameWordsLogic
     {
-        private static Random rand = new Random();
+        protected static Random rand = new Random();
         public List <string> WordExemps = new List<string> { "КРОШКА", "БУТЫЛКА", "ЯЗЫК","ССЫЛКА" };
-        private string Word;
-        private string MixedWord;
+        protected string Word;
+        protected string MixedWord;
+        protected SavesClass.SaverWord saver;
+
+        public GameWordsLogic(string nameFile)
+        {
+            saver = new SavesClass.SaverWord(nameFile);
+        }
+        public GameWordsLogic()
+        {
+            saver = new SavesClass.SaverWord("stocName");
+        }
 
         public string genWord()
         {
@@ -46,5 +56,6 @@ namespace games
             return MixedWord;
         }
 
+        
     }
 }
