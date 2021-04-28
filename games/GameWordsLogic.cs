@@ -55,7 +55,31 @@ namespace games
             MixedWord = str;
             return MixedWord;
         }
-
-        
+        public bool WordIsRight(string resWord)
+        {
+            if (resWord == Word)
+            {
+                saver.IncData(true);
+                return true;
+            }
+            else
+            {
+                saver.IncData(false);
+                return false;
+            }
+        }
+        public void SaveData()
+        {
+            saver.SaveAsBinaryFormat();
+        }
+        public string GetDataSaver()
+        {
+            string retVal = default;
+            foreach (string str in saver.GetWordData())
+            {
+                retVal += (str + '\n');
+            }            
+            return retVal;
+        }
     }
 }

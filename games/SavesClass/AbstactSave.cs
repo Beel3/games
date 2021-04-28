@@ -13,7 +13,7 @@ namespace games.SavesClass
         protected string nameFile;
         public static readonly string path = "Saves";
         protected SimpleData data;
-        public abstract void SaveAsBinaryFormat(object objGraph);
-        public abstract void LoadFromBinaryFile();
+        public abstract void SaveAsBinaryFormat();
+        public abstract object LoadFromBinaryFile();
     }
 }

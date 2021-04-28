@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace games.SavesClass
 {
-    sealed class WordData:SimpleData
+    [Serializable]//Да, почему-то атрибут не наследуется
+    sealed public class WordData:SimpleData
     {
+        public WordData() : base()
+        {
+        }
     }
 }

@@ -13,12 +13,14 @@ namespace games
     public partial class GameWords : Form
     {
         private TableLayoutPanel tableLayoutPanel;
-        private GameWordsLogic GameWordsLogic;
-
+        private GameWordsLogic gameWordsLogic;
+        private bool stateStatistic;
         public GameWords()
         {
             InitializeComponent();
-            GameWordsLogic = new GameWordsLogic();
+            gameWordsLogic = new GameWordsLogic();
+            richTextBox1.Visible = false;
+            stateStatistic = false;
         }
 
         #region TableLayoutPanel 
@@ -100,7 +102,7 @@ namespace games
             if (tableLayoutPanel != null)
                 tableLayoutPanel.Dispose();
 
-            CreateTableLayoutPanel(GameWordsLogic.DoMixedWord());
+            CreateTableLayoutPanel(gameWordsLogic.DoMixedWord());
             TrueAndFalse.Text = "";
         }
 
@@ -117,29 +119,28 @@ namespace games
             }
 
             Point pnt = new Point(1,0);
-            Control btn;
-            string startWord = GameWordsLogic.GetWord();
+            Control btn;            
             string resWord = default;
-            for (int i = 0; i < startWord.Length; i++, pnt.X++)
+            for (int i = 0; i < tableLayoutPanel.ColumnCount; i++, pnt.X++)
             {
                 btn = tableLayoutPanel.GetControlFromPosition(i, 0);
                 resWord += btn.Text[0];
             }
-            if (resWord == startWord)
-                TrueAndFalse.Text = "True";
+            if (gameWordsLogic.WordIsRight(resWord))
+                TrueAndFalse.Text = "the word is correct";            
             else
-                TrueAndFalse.Text = "False";
+                TrueAndFalse.Text = "the word is incorrect";
         }
 
         private void GameWords_FormClosing(object sender, FormClosingEventArgs e)
         {
+            gameWordsLogic.SaveData();
             MainForm.myMainForm.Visible = true;
         }
 
         private void GameWords_Shown(object sender, EventArgs e)
         {
-            TrueAndFalse.Text = "";
-            
+            TrueAndFalse.Text = "";            
         }
 
         private void GameWords_Load(object sender, EventArgs e)
@@ -147,8 +148,30 @@ namespace games
             if (tableLayoutPanel != null)
                 tableLayoutPanel.Dispose();
 
-            CreateTableLayoutPanel(GameWordsLogic.DoMixedWord());
+            CreateTableLayoutPanel(gameWordsLogic.DoMixedWord());
             TrueAndFalse.Text = "";
+        }
+
+        private void viewStatistics_Click(object sender, EventArgs e)
+        {
+            if (!stateStatistic)
+            {
+                richTextBox1.Text = gameWordsLogic.GetDataSaver();
+                richTextBox1.Enabled = false;
+                richTextBox1.Visible = true;
+                stateStatistic = true;
+            }
+            else
+            {
+                richTextBox1.Visible = false;
+                stateStatistic = false;
+            }
+        }
+
+        private void goback_Click(object sender, EventArgs e)
+        {
+            this.GameWords_FormClosing(sender, null);
+            this.Dispose();
         }
     }
 }

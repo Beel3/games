@@ -26,5 +26,10 @@ namespace games
             gameWords.Visible = true;
             myMainForm.Visible = false;
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

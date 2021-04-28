@@ -11,40 +11,59 @@ namespace games.SavesClass
     sealed public class SaverWord : AbstractSave
     {
         private string extension = ".saveWord";
-
+        private WordData data;
         public SaverWord(string nameFile)
         {
             this.nameFile = nameFile;
             data = new WordData();
+            data = (WordData)LoadFromBinaryFile();
         }
         
-        public override void SaveAsBinaryFormat(object objGraph)
+        public override void SaveAsBinaryFormat()
         {
+            object objGraph = (object)data;
             BinaryFormatter binFormat = new BinaryFormatter();
             if (Directory.Exists(path) == false)
             {
                 Directory.CreateDirectory(path);
             }
-            using (Stream fStream = new FileStream(path + nameFile + extension,
-            FileMode.Create, FileAccess.Write, FileShare.None))
+            //if(File.Exists(path + '/' + nameFile + extension) == true)
+            //{
+            //    WordData dataTemp = (WordData)LoadFromBinaryFile();
+            //    data.SetNumAnswer(data.GetNumAnswer() + dataTemp.GetNumAnswer());
+            //    data.SetNumСorrectAnswers(data.GetNumСorrectAnswers() + dataTemp.GetNumСorrectAnswers());
+            //}
+            using (Stream fStream = new FileStream(path +'/'+ nameFile + extension, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
             {
-                binFormat.Serialize(fStream, objGraph);
+                binFormat.Serialize(fStream, data);
             }
             System.Windows.Forms.MessageBox.Show("Сериализация");
 
         }
-        public override void LoadFromBinaryFile()
+        public override object LoadFromBinaryFile()
         {
+            object dataObj = new object();
             BinaryFormatter binFormat = new BinaryFormatter();
-            if (Directory.Exists(path) == true)
+            if (File.Exists(path + '/' + nameFile + extension) == true)
             {
-                using (Stream fStream = File.OpenRead(path + nameFile + extension))
+                using (Stream fStream = File.OpenRead(path + '/' + nameFile + extension))
                 {
-                    WordData carFromDisk = (WordData)binFormat.Deserialize(fStream);
+                    dataObj = (WordData)binFormat.Deserialize(fStream);
                     System.Windows.Forms.MessageBox.Show("Десерицализация");
                 }
             }
+            return dataObj;
         }
-
+        public void IncData(bool wordIsRight)
+        {
+            data.IncData(wordIsRight);
+        }
+        public List<string> GetWordData()
+        {
+            List<string> retVal = new List<string>();
+            retVal.Add("Количество правильных ответов = " + Convert.ToString(data.GetNumСorrectAnswers()));
+            retVal.Add("Количество ответов = " + Convert.ToString(data.GetNumAnswer()));
+            return retVal;
+        }
     }
 }

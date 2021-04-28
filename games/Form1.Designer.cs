@@ -36,9 +36,9 @@ namespace games
             // 
             // Words
             // 
-            this.Words.Location = new System.Drawing.Point(133, 139);
+            this.Words.Location = new System.Drawing.Point(58, 12);
             this.Words.Name = "Words";
-            this.Words.Size = new System.Drawing.Size(120, 105);
+            this.Words.Size = new System.Drawing.Size(120, 79);
             this.Words.TabIndex = 0;
             this.Words.Text = "Слова";
             this.Words.UseVisualStyleBackColor = true;
@@ -46,18 +46,18 @@ namespace games
             // 
             // examples
             // 
-            this.examples.Location = new System.Drawing.Point(317, 139);
+            this.examples.Location = new System.Drawing.Point(338, 12);
             this.examples.Name = "examples";
-            this.examples.Size = new System.Drawing.Size(120, 105);
+            this.examples.Size = new System.Drawing.Size(120, 79);
             this.examples.TabIndex = 1;
             this.examples.Text = "Примерчики";
             this.examples.UseVisualStyleBackColor = true;
             // 
             // boxes
             // 
-            this.boxes.Location = new System.Drawing.Point(491, 139);
+            this.boxes.Location = new System.Drawing.Point(608, 12);
             this.boxes.Name = "boxes";
-            this.boxes.Size = new System.Drawing.Size(120, 105);
+            this.boxes.Size = new System.Drawing.Size(120, 79);
             this.boxes.TabIndex = 2;
             this.boxes.Text = "Шкатулки";
             this.boxes.UseVisualStyleBackColor = true;
@@ -73,6 +73,7 @@ namespace games
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 
         }
