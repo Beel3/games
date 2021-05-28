@@ -44,13 +44,14 @@ namespace games.SavesClass
         {
             object dataObj = new object();
             BinaryFormatter binFormat = new BinaryFormatter();
-            if (File.Exists(path + '/' + nameFile + extension) == true)
+            if (File.Exists(path + '/' + nameFile + extension) != true)
             {
-                using (Stream fStream = File.OpenRead(path + '/' + nameFile + extension))
-                {
-                    dataObj = (WordData)binFormat.Deserialize(fStream);
-                    System.Windows.Forms.MessageBox.Show("Десерицализация");
-                }
+                SaveAsBinaryFormat();
+            }            
+            using (Stream fStream = File.OpenRead(path + '/' + nameFile + extension))
+            {
+                dataObj = (WordData)binFormat.Deserialize(fStream);
+                System.Windows.Forms.MessageBox.Show("Десерицализация");
             }
             return dataObj;
         }
