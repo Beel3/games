@@ -1,4 +1,5 @@
-﻿using System;
+﻿using games.GameEcuation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,6 +31,13 @@ namespace games
         private void MainForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void examples_Click(object sender, EventArgs e)
+        {
+            GameEquationForm gameEquationForm = new GameEquationForm();
+            gameEquationForm.Visible = true;
+            myMainForm.Visible = false;
         }
     }
 }

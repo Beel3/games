@@ -52,6 +52,7 @@ namespace games
             this.examples.TabIndex = 1;
             this.examples.Text = "Примерчики";
             this.examples.UseVisualStyleBackColor = true;
+            this.examples.Click += new System.EventHandler(this.examples_Click);
             // 
             // boxes
             // 
