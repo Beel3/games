@@ -29,6 +29,7 @@ namespace games.GameEcuation
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.level1_10 = new System.Windows.Forms.Button();
             this.level10_100 = new System.Windows.Forms.Button();
             this.lavel1_100 = new System.Windows.Forms.Button();
@@ -44,6 +45,9 @@ namespace games.GameEcuation
             this.multipTrueFalse = new System.Windows.Forms.CheckBox();
             this.satatistic = new System.Windows.Forms.RichTextBox();
             this.labelTrueFalse = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // level1_10
@@ -181,7 +185,7 @@ namespace games.GameEcuation
             // 
             // satatistic
             // 
-            this.satatistic.Location = new System.Drawing.Point(30, 38);
+            this.satatistic.Location = new System.Drawing.Point(33, 38);
             this.satatistic.Name = "satatistic";
             this.satatistic.Size = new System.Drawing.Size(718, 208);
             this.satatistic.TabIndex = 13;
@@ -197,11 +201,25 @@ namespace games.GameEcuation
             this.labelTrueFalse.Text = "label1";
             this.labelTrueFalse.Click += new System.EventHandler(this.labelTrueFalse_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Interval = 6000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(427, 194);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown1.TabIndex = 15;
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
             // GameEquationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 261);
+            this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.satatistic);
             this.Controls.Add(this.labelTrueFalse);
             this.Controls.Add(this.check);
@@ -222,6 +240,7 @@ namespace games.GameEcuation
             this.Text = "GameEquationForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameEquationForm_FormClosing);
             this.Load += new System.EventHandler(this.GameEquationForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,11 +257,13 @@ namespace games.GameEcuation
         private System.Windows.Forms.Button viewStatistics;
         private System.Windows.Forms.Button goback;
         private System.Windows.Forms.RichTextBox parametrs;
-        private System.Windows.Forms.RichTextBox ansverTextBox;
         private System.Windows.Forms.Button genEquation;
         private System.Windows.Forms.Button check;
         private System.Windows.Forms.CheckBox multipTrueFalse;
         private System.Windows.Forms.RichTextBox satatistic;
-        private System.Windows.Forms.Label labelTrueFalse;
+        protected System.Windows.Forms.Label labelTrueFalse;
+        protected System.Windows.Forms.RichTextBox ansverTextBox;
+        protected System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

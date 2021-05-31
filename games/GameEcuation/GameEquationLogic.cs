@@ -10,12 +10,14 @@ namespace games.GameEcuation
     {
         protected int min;
         protected int max;
+        protected bool levelMp;
         
-        public GameEquationLogic(int min, int max, bool level)
+        public GameEquationLogic(int min, int max, bool levelMp)
         {
+            this.levelMp = levelMp;
             this.min = min;
             this.max = max;
-            gameObject = new Equation(min,max, level);
+            gameObject = new Equation(min, max, levelMp);
             saver = new SavesClass.SaverEquation("Equation");
         }
         public override string GetGameObject()
@@ -48,6 +50,5 @@ namespace games.GameEcuation
         {
             saver.SaveAsBinaryFormat();
         }
-        
     }
 }

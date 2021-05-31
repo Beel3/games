@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<words>
+  <word name="Дом">
+    <Definition>Дом</Definition>
+  </word>
+  <word name="Котёл">
+    <Definition>Котёл</Definition>
+  </word>
+  <word name="Вода">
+    <Definition>Вода</Definition>
+  </word>
+  <word name="Кошелёк">
+    <Definition>Кошелёк</Definition>
+  </word>
+  <word name="Компьютер">
+    <Definition>Компьютер</Definition>
+  </word>
+  <word name="Телефон">
+    <Definition>Телефон</Definition>
+  </word>
+  <word name="Мастер">
+    <Definition>Мастер</Definition>
+  </word>
+  <word name="Магазин">
+    <Definition>Магазин</Definition>
+  </word>
+  <word name="Матрас">
+    <Definition>Матрас</Definition>
+  </word>
+</words>

@@ -1,8 +1,13 @@
-﻿using System;
+﻿using games.Properties;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace games
 {
@@ -13,10 +18,10 @@ namespace games
         protected string Word;
         protected string MixedWord;
         protected SavesClass.SaverWord saver;
-
+        protected const int countWordInXml = 9;
         public GameWordsLogic(string nameFile)
         {
-            saver = new SavesClass.SaverWord(nameFile);
+            saver = new SavesClass.SaverWord(nameFile);            
         }
         public GameWordsLogic()
         {
@@ -25,7 +30,7 @@ namespace games
 
         public string genWord()
         {
-            Word = WordExemps[rand.Next(WordExemps.Count)];
+            Word = GetWordInXml();
             return Word;
         }
         public string GetWord()
@@ -80,6 +85,36 @@ namespace games
                 retVal += (str + '\n');
             }            
             return retVal;
+        }
+
+        private string GetWordInXml()
+        {
+            XmlDocument xDoc = new XmlDocument();
+            try
+            {
+                xDoc.LoadXml(Resources.XMLFile1);
+            }
+            catch
+            {
+                MessageBox.Show("aaa");
+            }
+
+            XmlElement xRoot = xDoc.DocumentElement;
+            // обход всех узлов в корневом элементе
+            int numWord = rand.Next(countWordInXml);
+            int i = 0;
+            foreach (XmlNode xnode in xRoot)
+            {
+                // получаем атрибут name
+                if ((xnode.Attributes.Count > 0)&&(i == numWord))
+                {
+                    XmlNode attr = xnode.Attributes.GetNamedItem("name");
+                    if (attr != null)
+                        return attr.Value;
+                }
+                i++;
+            }
+            return "";
         }
     }
 }

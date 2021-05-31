@@ -12,58 +12,61 @@ namespace games.GameEcuation
 {
     public partial class GameEquationForm : Form
     {
-        protected GameEquationLogic gameEquation;
-        private bool stateStatistic = false;
-        
+        protected GameEquationLogic gameEquation;        
+        protected bool stateStatistic = false;
+        protected bool withTimer = false;
+        protected bool haveAnsver = false;
         public GameEquationForm()
         {
             InitializeComponent();
-            сhoosingLevel(true);
+            choisingForm(true);
             satatistic.Visible = false;
             labelTrueFalse.Visible = false;
+            numericUpDown1.Visible = false;
         }
 
         private void level1_10_Click(object sender, EventArgs e)
         {
-            сhoosingLevel(false);
-            gameEquation = new GameEquationLogic(1,10, multipTrueFalse.Checked);
+            correctCreateLogic(1,10, false);
         }        
 
         private void level10_100_Click(object sender, EventArgs e)
         {
-            сhoosingLevel(false);
-            gameEquation = new GameEquationLogic(10, 100, multipTrueFalse.Checked);
+            correctCreateLogic(10, 100, false);
         }
 
         private void lavel1_100_Click(object sender, EventArgs e)
         {
-            сhoosingLevel(false);
-            gameEquation = new GameEquationLogic(1, 100, multipTrueFalse.Checked);
+            correctCreateLogic(1, 100, false);
         }
 
         private void level100_1000_Click(object sender, EventArgs e)
         {
-            сhoosingLevel(false);
-            gameEquation = new GameEquationLogic(100, 1000, multipTrueFalse.Checked);
+            correctCreateLogic(100, 1000, false);
         }
 
         private void level1_1000_Click(object sender, EventArgs e)
         {
-            сhoosingLevel(false);
-            gameEquation = new GameEquationLogic(1, 1000, multipTrueFalse.Checked);
+            correctCreateLogic(1, 1000, false);            
         }
 
-        private void multipTrueFalse_CheckedChanged(object sender, EventArgs e)
+        protected void multipTrueFalse_CheckedChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void time_CheckedChanged(object sender, EventArgs e) 
+        protected void time_CheckedChanged(object sender, EventArgs e) 
         {
-
+            if (withTimer)
+                withTimer = false;
+            else
+            {
+                withTimer = true;
+                numericUpDown1.Visible = true;
+            }            
         }
 
-        private void viewStatistics_Click(object sender, EventArgs e)
+        protected void viewStatistics_Click(object sender, EventArgs e)
         {
             if (!stateStatistic)
             {
@@ -79,22 +82,28 @@ namespace games.GameEcuation
             }
         }
 
-        private void goback_Click(object sender, EventArgs e)
+        protected void goback_Click(object sender, EventArgs e)
         {
             this.GameEquationForm_FormClosing(sender, null);
             this.Dispose();
         }
 
-        private void genEquation_Click(object sender, EventArgs e)
+        protected void genEquation_Click(object sender, EventArgs e)
         {
-            parametrs.Text = gameEquation.GetGameObject();
-            labelTrueFalse.Visible = false;
-            ansverTextBox.Text = "";
+            if (!haveAnsver)
+            {
+                parametrs.Text = gameEquation.GetGameObject();
+                labelTrueFalse.Visible = false;
+                ansverTextBox.Text = "";
+                haveAnsver = true;
+                if (withTimer)
+                    timer1.Start();
+            }
         }
 
-        private void check_Click(object sender, EventArgs e)
+        protected void check_Click(object sender, EventArgs e)
         {            
-            if (gameEquation.WordIsRight(ansverTextBox.Text))
+            if (gameEquation.WordIsRight(ansverTextBox.Text) && ansverTextBox.Text != "")
             {
                 labelTrueFalse.Text = "Верный ответ";                
             }
@@ -103,36 +112,33 @@ namespace games.GameEcuation
                 labelTrueFalse.Text = "Не верный ответ";
             }
             labelTrueFalse.Visible = true;
+            haveAnsver = false;
+            if (withTimer)
+                timer1.Stop();
         }
 
-        private void parametrs_TextChanged(object sender, EventArgs e)
+        protected void parametrs_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void ansverTextBox_TextChanged(object sender, EventArgs e)
+        protected void ansverTextBox_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void satatistic_TextChanged(object sender, EventArgs e)
-        {
-            satatistic.Visible = true;
-            
-        }
-
-        private void GameEquationForm_Load(object sender, EventArgs e)
+        protected void GameEquationForm_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void GameEquationForm_FormClosing(object sender, FormClosingEventArgs e)
+        protected void GameEquationForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             gameEquation.SaveData();
             MainForm.myMainForm.Visible = true;
         }
 
-        private void сhoosingLevel(bool val)
+        protected void choisingForm(bool val)
         {
             level1_10.Visible = val;
             level10_100.Visible = val;
@@ -150,12 +156,39 @@ namespace games.GameEcuation
             ansverTextBox.Visible = !val;
         }
 
-        private void genGameObj()
+        protected void genGameObj()
         {
             gameEquation.GetGameObject();
         }
 
-        private void labelTrueFalse_Click(object sender, EventArgs e)
+        protected void labelTrueFalse_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void correctCreateLogic(int ref1, int ref2, bool choisingFormVal)
+        {
+            choisingForm(choisingFormVal);
+            if (withTimer)
+            {
+                gameEquation = new GameEquationWithTimer(ref1, ref2, multipTrueFalse.Checked);
+                timer1.Enabled = true;
+                timer1.Interval = Convert.ToInt32(numericUpDown1.Value * 1000);
+                numericUpDown1.Visible = false;
+            }
+            else
+                gameEquation = new GameEquationLogic(ref1, ref2, multipTrueFalse.Checked);
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            MessageBox.Show(((GameEquationWithTimer)gameEquation).TimeIsOver());
+            timer1.Enabled = false;
+            this.GameEquationForm_FormClosing(sender, null);
+            this.Dispose();
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
 
         }
