@@ -38,12 +38,13 @@ namespace games
             
             for (int i = 0; i < word.Length; i++)
             {
-                var button = new Button { 
+                var button = new Button {
                     Parent = tableLayoutPanel,
                     Text = Convert.ToString(word[i]),
-                    Width=50,
-                    Height=50                    
-                };
+                    Width = 50,
+                    Height = 50,
+                    Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)))
+            };
                 button.MouseDown += Button_MouseDown;
                 button.MouseMove += Button_MouseMove;
                 button.MouseUp += Button_MouseUp;
@@ -127,9 +128,9 @@ namespace games
                 resWord += btn.Text[0];
             }
             if (gameWordsLogic.WordIsRight(resWord))
-                TrueAndFalse.Text = "the word is correct";            
+                TrueAndFalse.Text = "Ответ верный";            
             else
-                TrueAndFalse.Text = "the word is incorrect";
+                TrueAndFalse.Text = "Ответ не верный";
         }
 
         private void GameWords_FormClosing(object sender, FormClosingEventArgs e)
