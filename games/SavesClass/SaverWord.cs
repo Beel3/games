@@ -27,17 +27,12 @@ namespace games.SavesClass
             {
                 Directory.CreateDirectory(path);
             }
-            //if(File.Exists(path + '/' + nameFile + extension) == true)
-            //{
-            //    WordData dataTemp = (WordData)LoadFromBinaryFile();
-            //    data.SetNumAnswer(data.GetNumAnswer() + dataTemp.GetNumAnswer());
-            //    data.SetNumСorrectAnswers(data.GetNumСorrectAnswers() + dataTemp.GetNumСorrectAnswers());
-            //}
+            
             using (Stream fStream = new FileStream(path +'/'+ nameFile + extension, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None))
             {
                 binFormat.Serialize(fStream, data);
             }
-            System.Windows.Forms.MessageBox.Show("Сериализация");
+            //System.Windows.Forms.MessageBox.Show("Сериализация");
 
         }
         public override object LoadFromBinaryFile()
@@ -51,7 +46,7 @@ namespace games.SavesClass
             using (Stream fStream = File.OpenRead(path + '/' + nameFile + extension))
             {
                 dataObj = (WordData)binFormat.Deserialize(fStream);
-                System.Windows.Forms.MessageBox.Show("Десерицализация");
+                //System.Windows.Forms.MessageBox.Show("Десерицализация");
             }
             return dataObj;
         }

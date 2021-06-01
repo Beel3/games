@@ -13,8 +13,7 @@ namespace games
 {
     public class GameWordsLogic
     {
-        protected static Random rand = new Random();
-        public List <string> WordExemps = new List<string> { "КРОШКА", "БУТЫЛКА", "ЯЗЫК","ССЫЛКА" };
+        protected static Random rand = new Random();        
         protected string Word;
         protected string MixedWord;
         protected SavesClass.SaverWord saver;

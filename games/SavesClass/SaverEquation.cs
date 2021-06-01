@@ -31,7 +31,7 @@ namespace games.SavesClass
             {
                 binFormat.Serialize(fStream, data);
             }
-            System.Windows.Forms.MessageBox.Show("Сериализация");
+            //System.Windows.Forms.MessageBox.Show("Сериализация");
 
         }
         public override object LoadFromBinaryFile()
@@ -45,7 +45,7 @@ namespace games.SavesClass
             using (Stream fStream = File.OpenRead(path + '/' + nameFile + extension))
             {
                 dataObj = (EquationData)binFormat.Deserialize(fStream);
-                System.Windows.Forms.MessageBox.Show("Десерицализация");
+                //System.Windows.Forms.MessageBox.Show("Десерицализация");
             }
             return dataObj;
         }

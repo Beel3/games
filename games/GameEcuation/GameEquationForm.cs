@@ -173,7 +173,10 @@ namespace games.GameEcuation
             {
                 gameEquation = new GameEquationWithTimer(ref1, ref2, multipTrueFalse.Checked);
                 timer1.Enabled = true;
-                timer1.Interval = Convert.ToInt32(numericUpDown1.Value * 1000);
+                if (numericUpDown1.Value != 0)
+                    timer1.Interval = Convert.ToInt32(numericUpDown1.Value * 1000);
+                else
+                    timer1.Interval = 1000;
                 numericUpDown1.Visible = false;
             }
             else
@@ -182,8 +185,9 @@ namespace games.GameEcuation
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            MessageBox.Show(((GameEquationWithTimer)gameEquation).TimeIsOver());
+            timer1.Stop();
             timer1.Enabled = false;
+            MessageBox.Show(((GameEquationWithTimer)gameEquation).TimeIsOver());            
             this.GameEquationForm_FormClosing(sender, null);
             this.Dispose();
         }
