@@ -185,6 +185,8 @@ namespace games.GameEcuation
             // 
             // satatistic
             // 
+            this.satatistic.Enabled = false;
+            this.satatistic.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.satatistic.Location = new System.Drawing.Point(33, 38);
             this.satatistic.Name = "satatistic";
             this.satatistic.Size = new System.Drawing.Size(718, 208);
@@ -237,7 +239,7 @@ namespace games.GameEcuation
             this.Controls.Add(this.level1_10);
             this.Name = "GameEquationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "GameEquationForm";
+            this.Text = "Примерчки";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameEquationForm_FormClosing);
             this.Load += new System.EventHandler(this.GameEquationForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();

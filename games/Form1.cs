@@ -10,8 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace games
-{
-    
+{    
     public partial class MainForm : Form
     {
         public static MainForm myMainForm;
